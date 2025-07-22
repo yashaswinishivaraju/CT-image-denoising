@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Flask cache and debug files
+instance/
+*.log
+
+# DICOM uploads or temp data
+web/uploads/
+*.dcm
+
+# Environment
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE / Editor folders
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Python egg metadata
+*.egg-info/
+dist/
+build/
+
+# Image outputs
+web/static/*.png

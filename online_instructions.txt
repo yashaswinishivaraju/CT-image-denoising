@@ -1,0 +1,114 @@
+CT-Diagnosing/
+│
+├── web/ 
+│   ├── static/
+│   │   └── styles.css
+│   ├── templates/
+│   │   ├── index.html
+│   │   └── result.html
+│   ├── uploads/
+│   ├── __init__.py
+│   ├── main.py
+│   └── wsgi.py
+│
+├── denoising/
+│   ├── __init__.py
+│   └── enhancer.py
+│
+├── sample_data/
+│   └── example.dcm
+│
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── .gitignore
+└── deploy/
+    ├── start.sh
+    └── nginx_config
+
+a.web/__init__.py
+from flask import Flask
+def create_app():
+    app = Flask(__name__)
+    app.config['UPLOAD_FOLDER'] = 'web/uploads'
+
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    return app
+
+b.web/wsgi.py
+from web import create_app
+app = create_app()
+
+c.requirements.txt
+Flask
+pydicom
+numpy
+opencv-python
+PyWavelets
+gunicorn
+
+d.deploy/start.sh
+!/bin/bash
+export FLASK_APP=web
+export FLASK_ENV=production
+gunicorn --bind 0.0.0.0:8000 web.wsgi:app
+
+-Make sure to run: chmod +x deploy/start.sh
+  
+e.deploy/nginx_config
+server {
+    listen 80;
+    server_name YOUR_EC2_PUBLIC_IP;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location /static/ {
+        alias /home/ec2-user/CT-Diagnosing/web/static/;
+    }
+}
+
+f.EC2 Deployment Steps
+1. Launch EC2 Instance (Amazon Linux 2 or Ubuntu)
+2. SSH into the instance:
+   ssh -i "your-key.pem" ec2-user@your-ec2-public-ip3. Install essentials:
+   sudo yum update -y
+   sudo yum install git python3 python3-pip nginx -y
+4. Clone your repo:
+   git clone https://github.com/your-username/CT-Diagnosing.git
+   cd CT-Diagnosing
+5. Create & activate virtual environment:
+   python3 -m venv venv
+   source venv/bin/activate
+6. Install Python packages:
+   pip install -r requirements.txt
+7. Start your app:
+   ./deploy/start.sh
+8. Configure Nginx:
+   sudo cp deploy/nginx_config /etc/nginx/conf.d/ctdiagnosing.conf
+   sudo systemctl restart nginx
+9. Open ports in EC2 security group:
+   - Allow HTTP (80)
+   - Allow Custom TCP Rule for port 8000 (for test)
+   - Allow SSH (22)
+
+Optional Tips:
+
+1.Add logs to `start.sh`:
+   gunicorn --bind 0.0.0.0:8000 web.wsgi:app > gunicorn.log 2>&1 &
+
+2.Use `screen` or `tmux` to keep the app running in the background
+
+3.To run Flask manually (if needed):
+   export FLASK_APP=web
+   flask run --host=0.0.0.0
+
+Final Result:
+
+Visit: http://your-ec2-public-ip  
+Upload a DICOM file → See enhanced image.

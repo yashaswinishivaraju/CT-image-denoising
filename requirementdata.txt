@@ -1,0 +1,7 @@
+Flask==3.0.3
+Werkzeug==3.0.1
+numpy==1.26.4
+opencv-python==4.9.0.80
+pydicom==2.4.4
+PyWavelets==1.6.0
+scikit-image==0.22.0
