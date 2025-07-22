@@ -1,0 +1,88 @@
+/* Reset some browser defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General body styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f9ff;
+  color: #333;
+  text-align: center;
+  padding: 40px;
+}
+
+/* Container box for content */
+.container {
+  background-color: white;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+/* Headings */
+h1 {
+  color: #0077cc;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #004d99;
+  margin-bottom: 16px;
+}
+
+/* Upload button */
+input[type="file"] {
+  margin: 20px 0;
+  padding: 12px;
+  border: 2px dashed #0077cc;
+  border-radius: 8px;
+  background-color: #e8f0fe;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="file"]:hover {
+  background-color: #d0e4fd;
+}
+
+/* Submit button */
+button, input[type="submit"] {
+  padding: 12px 28px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+  background-color: #005fa3;
+}
+
+/* Displayed images */
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 30px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+/* Result section */
+.result-section {
+  margin-top: 40px;
+}
+
+footer {
+  margin-top: 60px;
+  font-size: 14px;
+  color: #999;
+}
