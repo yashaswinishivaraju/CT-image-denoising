@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CT Image Denoising</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>CT Image Denoising</h1>
+        <h2>Enhance Your CT Scan Image Quality</h2>
+
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" name="dicom_file" accept=".dcm" required>
+            <br>
+            <input type="submit" value="Upload & Denoise">
+        </form>
+
+        {% if original_image %}
+        <div class="result-section">
+            <h2>Original Image</h2>
+            <img src="{{ url_for('static', filename=original_image) }}" alt="Original CT Image">
+        </div>
+        {% endif %}
+
+        {% if processed_image %}
+        <div class="result-section">
+            <h2>Denoised Image (Enhanced +15%)</h2>
+            <img src="{{ url_for('static', filename=processed_image) }}" alt="Denoised CT Image">
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CT Denoise App. Built for offline use with Python & Flask.</p>
+    </footer>
+</body>
+</html>

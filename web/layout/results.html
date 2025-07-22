@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Denoised Result - CT Image Denoising</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            margin: 20px auto;
+        }
+
+        .image-container img {
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <h2>Denoised CT Scan Output</h2>
+
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='enhanced.png') }}" alt="Denoised Image">
+    </div>
+
+    <a class="back-link" href="/">← Upload Another Image</a>
+
+    <footer>
+        <p>&copy; 2025 CT Image Denoising. Offline Flask Project.</p>
+    </footer>
+</body>
+</html>
+
